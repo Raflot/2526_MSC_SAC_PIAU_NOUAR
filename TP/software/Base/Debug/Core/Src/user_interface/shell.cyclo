@@ -2,7 +2,8 @@
 ../Core/Src/user_interface/shell.c:31:12:is_string_valid	4
 ../Core/Src/user_interface/shell.c:60:12:sh_help	2
 ../Core/Src/user_interface/shell.c:75:12:sh_test_list	2
-../Core/Src/user_interface/shell.c:95:6:shell_init	1
-../Core/Src/user_interface/shell.c:120:5:shell_add	3
-../Core/Src/user_interface/shell.c:145:12:shell_exec	6
-../Core/Src/user_interface/shell.c:186:5:shell_run	6
+../Core/Src/user_interface/shell.c:85:6:sh_motor	2
+../Core/Src/user_interface/shell.c:111:6:shell_init	1
+../Core/Src/user_interface/shell.c:137:5:shell_add	3
+../Core/Src/user_interface/shell.c:162:12:shell_exec	6
+../Core/Src/user_interface/shell.c:203:5:shell_run	6

@@ -82,7 +82,23 @@ static int sh_test_list(h_shell_t* h_shell, int argc, char** argv)
 	return 0;
 }
 
-
+void sh_motor(h_shell_t* h_shell, int argc, char** argv)
+{
+    if (argc == 2)
+    {
+        int command_val = atoi(argv[1]);
+        motor_set_command(command_val);
+    	int size;
+    	size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "%s : Motor value set to %d %\r\n", argv[0],command_val);
+    	h_shell->drv.transmit(h_shell->print_buffer, size);
+    }
+    else
+    {
+    	int size;
+    	size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "%s : trop d'arguments\r\n", argv[0]);
+    	h_shell->drv.transmit(h_shell->print_buffer, size);
+    }
+}
 
 
 /**
@@ -104,6 +120,7 @@ void shell_init(h_shell_t* h_shell)
 
 	shell_add(h_shell, "help", sh_help, "Help");
 	shell_add(h_shell, "test", sh_test_list, "Test list");
+	shell_add(h_shell, "motor", sh_motor, "Set motor speed (alpha)");
 }
 
 /**
