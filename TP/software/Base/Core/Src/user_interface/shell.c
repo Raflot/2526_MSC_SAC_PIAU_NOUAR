@@ -120,7 +120,7 @@ void shell_init(h_shell_t* h_shell)
 
 	shell_add(h_shell, "help", sh_help, "Help");
 	shell_add(h_shell, "test", sh_test_list, "Test list");
-	shell_add(h_shell, "motor", sh_motor, "Set motor speed (alpha)");
+	shell_add(h_shell, "speed", sh_motor, "Set motor pwm ratio (0-100)");
 }
 
 /**
