@@ -118,7 +118,7 @@ L'un des problèmes qu'on peut rencontrer est une motée soudaine et extrème du
 
 On cherche maintenant à mesurer le courant en sortie du transistor qui commande le moteur. 
 
-Dans le fichier schéma global sur Kicad, on peut observer que le chopper Arm_IRF540NBbF1 contient un pin Imes qui correspond à la mesure de courannt. On peut voir que ce pin est relié au pin PA1 de la carte Nucléo, donc on fera notre mesure de courant sur ce pin là
+Dans le fichier schéma global sur Kicad, on peut observer que le chopper Arm_IRF540NBbF contient un pin Imes qui correspond à la mesure de courannt. On peut voir que ce pin est relié au pin PA1 de la carte Nucléo, donc on fera notre mesure de courant sur ce pin là
 
 
 
@@ -133,4 +133,8 @@ Dans le fichier schéma global sur Kicad, on peut observer que le chopper Arm_IR
 
 <p align="center">
   <img width="403" height="391" alt="image" src="https://github.com/user-attachments/assets/b2ea57ee-55b2-409f-9b1e-ca1ffbc02978" />
+</p>
+
+<p align="center">
+  <img width="630" height="565" alt="image" src="https://github.com/user-attachments/assets/ee9febae-fedc-4cf4-a684-a8253753b650" />
 </p>
