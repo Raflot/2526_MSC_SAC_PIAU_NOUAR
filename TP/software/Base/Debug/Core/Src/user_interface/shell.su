@@ -3,7 +3,9 @@
 ../Core/Src/user_interface/shell.c:60:12:sh_help	48	static
 ../Core/Src/user_interface/shell.c:75:12:sh_test_list	40	static
 ../Core/Src/user_interface/shell.c:85:6:sh_motor	48	static
-../Core/Src/user_interface/shell.c:111:6:shell_init	24	static
-../Core/Src/user_interface/shell.c:137:5:shell_add	24	static
-../Core/Src/user_interface/shell.c:162:12:shell_exec	64	static
-../Core/Src/user_interface/shell.c:203:5:shell_run	24	static
+../Core/Src/user_interface/shell.c:103:6:sh_start	32	static
+../Core/Src/user_interface/shell.c:120:6:sh_stop	32	static
+../Core/Src/user_interface/shell.c:144:6:shell_init	24	static
+../Core/Src/user_interface/shell.c:172:5:shell_add	24	static
+../Core/Src/user_interface/shell.c:197:12:shell_exec	64	static
+../Core/Src/user_interface/shell.c:238:5:shell_run	24	static

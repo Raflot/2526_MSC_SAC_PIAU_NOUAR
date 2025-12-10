@@ -3,7 +3,9 @@
 ../Core/Src/user_interface/shell.c:60:12:sh_help	2
 ../Core/Src/user_interface/shell.c:75:12:sh_test_list	2
 ../Core/Src/user_interface/shell.c:85:6:sh_motor	2
-../Core/Src/user_interface/shell.c:111:6:shell_init	1
-../Core/Src/user_interface/shell.c:137:5:shell_add	3
-../Core/Src/user_interface/shell.c:162:12:shell_exec	6
-../Core/Src/user_interface/shell.c:203:5:shell_run	6
+../Core/Src/user_interface/shell.c:103:6:sh_start	2
+../Core/Src/user_interface/shell.c:120:6:sh_stop	2
+../Core/Src/user_interface/shell.c:144:6:shell_init	1
+../Core/Src/user_interface/shell.c:172:5:shell_add	3
+../Core/Src/user_interface/shell.c:197:12:shell_exec	6
+../Core/Src/user_interface/shell.c:238:5:shell_run	6

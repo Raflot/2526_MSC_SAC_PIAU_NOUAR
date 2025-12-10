@@ -50,7 +50,7 @@ void motor_stop(void)
 	HAL_TIMEx_PWMN_Stop(MOTOR_TIMER, PWM_CH2);
 }
 
-void set_speed(){
+void set_speed(void){
 	if (state.CURRENT_RATIO < state.TARGET_RATIO) {
 		state.CURRENT_RATIO++;
 	}
