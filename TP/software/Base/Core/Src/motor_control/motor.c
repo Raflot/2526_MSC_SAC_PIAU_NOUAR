@@ -13,11 +13,30 @@
 #define PWM_CH2        TIM_CHANNEL_2
 #define PWM_MAX        8499
 typedef struct {
-	int CURRENT_RATIO;
-	int TARGET_RATIO;
-} MotorState;
+	float PREV_RATIO;
+	float CURRENT_RATIO;
+	float TARGET_RATIO;
+	float MAX_RATIO;
 
-MotorState state = {50, 50};
+	float PREV_AMP;
+	float CURRENT_AMP;
+	float TARGET_AMP;
+	float MAX_AMP;
+
+	float PREV_SPEED;
+	float CURRENT_SPEED;
+	float TARGET_SPEED;
+	float MAX_SPEED;
+
+	float integrator;
+	float prevError;
+	float prevMeasurement;
+
+	int TIME;
+} MotorState;
+extern MotorState state = {0};
+
+
 
 void motor_init(void)
 {
@@ -39,6 +58,8 @@ void motor_init(void)
 	}
 	__HAL_TIM_SET_COMPARE(MOTOR_TIMER, PWM_CH1, PWM_MAX/2);
 	__HAL_TIM_SET_COMPARE(MOTOR_TIMER, PWM_CH2, PWM_MAX/2);
+	state.CURRENT_RATIO = 50;
+	state.TIME = 100;
 }
 
 void motor_stop(void)

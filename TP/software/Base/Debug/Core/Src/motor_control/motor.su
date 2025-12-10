@@ -1,4 +1,4 @@
-../Core/Src/motor_control/motor.c:22:6:motor_init	8	static
-../Core/Src/motor_control/motor.c:44:6:motor_stop	8	static
-../Core/Src/motor_control/motor.c:53:6:set_speed	16	static
-../Core/Src/motor_control/motor.c:68:6:motor_set_command	16	static
+../Core/Src/motor_control/motor.c:39:6:motor_init	8	static
+../Core/Src/motor_control/motor.c:62:6:motor_stop	8	static
+../Core/Src/motor_control/motor.c:71:6:set_speed	16	static
+../Core/Src/motor_control/motor.c:86:6:motor_set_command	16	static

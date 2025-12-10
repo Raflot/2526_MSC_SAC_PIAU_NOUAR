@@ -6,3 +6,7 @@
  */
 
 #include "acquisition/input_analog.h"
+
+void capt(){
+
+}
