@@ -12,7 +12,12 @@
 #define PWM_CH1        TIM_CHANNEL_1
 #define PWM_CH2        TIM_CHANNEL_2
 #define PWM_MAX        8499
-int CURENT_RATIO = 50;
+typedef struct {
+	int CURRENT_RATIO;
+	int TARGET_RATIO;
+} MotorState;
+
+MotorState state = {50, 50};
 
 void motor_init(void)
 {
@@ -45,25 +50,28 @@ void motor_stop(void)
 	HAL_TIMEx_PWMN_Stop(MOTOR_TIMER, PWM_CH2);
 }
 
-void motor_set_command(int cmd, int* CURENT_RATIO)
-{
-
-	if (cmd > PWM_MAX) cmd = PWM_MAX;
-	int D = cmd - *CURENT_RATIO;
-	if (D>0){
-		for (int i=0; i < D/10;i++){
-			__HAL_TIM_SET_COMPARE(MOTOR_TIMER, PWM_CH1, PWM_MAX*(*CURENT_RATIO)/100+10*i);
-			__HAL_TIM_SET_COMPARE(MOTOR_TIMER, PWM_CH2, PWM_MAX-PWM_MAX*(*CURENT_RATIO)/100-10*i);
-			HAL_Delay(1000);
-		}
+void set_speed(){
+	if (state.CURRENT_RATIO < state.TARGET_RATIO) {
+		state.CURRENT_RATIO++;
 	}
-	else
-	{
-		for (int i=0; i < -D/100;i++){
-			__HAL_TIM_SET_COMPARE(MOTOR_TIMER, PWM_CH1, PWM_MAX*(*CURENT_RATIO)/100-10*i);
-			__HAL_TIM_SET_COMPARE(MOTOR_TIMER, PWM_CH2, PWM_MAX-PWM_MAX*(*CURENT_RATIO)/100+10*i);
-			HAL_Delay(1000);
-		}
+	else if (state.CURRENT_RATIO > state.TARGET_RATIO) {
+		state.CURRENT_RATIO--;
 	}
-	CURENT_RATIO = cmd;
+	else {
+		return;
+	}
+	int ratio = state.CURRENT_RATIO;
+	__HAL_TIM_SET_COMPARE(MOTOR_TIMER, PWM_CH1, PWM_MAX * ratio / 100);
+	__HAL_TIM_SET_COMPARE(MOTOR_TIMER, PWM_CH2, PWM_MAX - (PWM_MAX * ratio / 100));
 }
+
+void motor_set_command(int cmd)
+{
+	if (cmd > 100) cmd = 100;
+	if (cmd < 0) cmd = 0;
+
+	state.TARGET_RATIO = cmd;
+
+}
+
+

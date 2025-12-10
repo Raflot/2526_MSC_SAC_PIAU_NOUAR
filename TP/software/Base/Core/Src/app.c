@@ -8,7 +8,6 @@
 #include "app.h"
 
 #include "user_interface/shell.h"
-
 static char shell_uart2_received_char;
 
 void init_device(void){
@@ -60,5 +59,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 }
 
 void loop(){
-
+	set_speed();
+	HAL_Delay(100);
 }
