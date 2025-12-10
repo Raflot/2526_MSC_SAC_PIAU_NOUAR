@@ -113,3 +113,5 @@ On envoie une tension de 6 V et on limite le courant envoyé au moteur à 1 A : 
 
 
 On peut observer en jaune la tension du moteur, 
+
+L'un des problèmes qu'on peut rencontrer est une motée soudaine et extrème du courant. En effet, sur une très courte période le courant peut atteindre les 70 Ampères, ce qui est bien au dessus du courant nominal du moteur.
