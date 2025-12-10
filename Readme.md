@@ -115,3 +115,22 @@ On envoie une tension de 6 V et on limite le courant envoyé au moteur à 1 A : 
 On peut observer en jaune la tension du moteur, 
 
 L'un des problèmes qu'on peut rencontrer est une motée soudaine et extrème du courant. En effet, sur une très courte période le courant peut atteindre les 70 Ampères, ce qui est bien au dessus du courant nominal du moteur.
+
+On cherche maintenant à mesurer le courant en sortie du transistor qui commande le moteur. 
+
+Dans le fichier schéma global sur Kicad, on peut observer que le chopper Arm_IRF540NBbF1 contient un pin Imes qui correspond à la mesure de courannt. On peut voir que ce pin est relié au pin PA1 de la carte Nucléo, donc on fera notre mesure de courant sur ce pin là
+
+
+
+
+<p align="center">
+  <img width="473" height="419" alt="Capture d&#39;écran 2025-12-10 165612" src="https://github.com/user-attachments/assets/87946e84-b1a0-4522-a07b-7c14b5cc1b03" />
+</p>
+
+<p align="center">
+  <img width="299" height="294" alt="image" src="https://github.com/user-attachments/assets/23ad4e0c-57f3-472b-80ef-3e259fa69557" />
+</p>
+
+<p align="center">
+  <img width="403" height="391" alt="image" src="https://github.com/user-attachments/assets/b2ea57ee-55b2-409f-9b1e-ca1ffbc02978" />
+</p>
