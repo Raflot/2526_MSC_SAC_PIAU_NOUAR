@@ -34,7 +34,7 @@ void init_device(void){
 	//
 	// Initialisation data acquistion
 	// ANALOG INPUT
-	//	input_analog_init();
+	capt_init();
 	// ENCODER INPUT
 	//	input_encoder_init();
 }
@@ -62,6 +62,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 void loop(){
 	set_speed();
 	HAL_Delay(100);
-	capt();
+	//capt();
 	//pid();
 }

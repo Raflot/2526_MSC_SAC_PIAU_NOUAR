@@ -123,7 +123,7 @@ void sh_stop(h_shell_t* h_shell, int argc, char** argv)
     {
     	motor_stop();
     	int size;
-    	size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "PWM stoped %\r\n");
+    	size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "PWM stoped \r\n");
     	h_shell->drv.transmit(h_shell->print_buffer, size);
     }
     else
@@ -132,6 +132,14 @@ void sh_stop(h_shell_t* h_shell, int argc, char** argv)
     	size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "%s : trop d'arguments\r\n", argv[0]);
     	h_shell->drv.transmit(h_shell->print_buffer, size);
     }
+}
+
+void sh_imes(h_shell_t* h_shell, int argc, char** argv)
+{
+    float current = measure_current_pooling();
+    int size;
+    size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Courant U: %.3f A\r\n", current);
+    h_shell->drv.transmit(h_shell->print_buffer, size);
 }
 
 /**
@@ -156,6 +164,7 @@ void shell_init(h_shell_t* h_shell)
 	shell_add(h_shell, "speed", sh_motor, "Set motor pwm ratio (0-100)");
 	shell_add(h_shell, "start", sh_start, "PWM started");
 	shell_add(h_shell, "stop", sh_stop, "PWM stoped");
+	shell_add(h_shell, "mesi", sh_imes, "Mesure courant (Polling)");
 }
 
 /**

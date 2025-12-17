@@ -1,1 +1,2 @@
-../Core/Src/acquisition/input_analog.c:10:6:capt	1
+../Core/Src/acquisition/input_analog.c:17:6:capt_init	1
+../Core/Src/acquisition/input_analog.c:22:7:measure_current_pooling	2
