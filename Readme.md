@@ -139,11 +139,11 @@ Dans le fichier schéma global sur Kicad, on peut observer que le chopper Arm_IR
   <img width="630" height="565" alt="image" src="https://github.com/user-attachments/assets/ee9febae-fedc-4cf4-a684-a8253753b650" />
 </p>
 
-En cherchant dans la datasheet du capteur GO 10-SME/SP3, on peut retrouver la fonction de transfert du capteur de mesure de courant : U<sub>out</sub> = V<sub>ref</sub> + (S<sub>N</sub> * I<sub>P</sub>)
+En cherchant dans la datasheet du capteur GO 10-SME/SP3, on peut retrouver la fonction de transfert du capteur de mesure de courant : U<sub>out</sub> = U<sub>ref</sub> + (S<sub>N</sub> * I<sub>P</sub>)
 
 Avec :
 
-V<sub>ref</sub> : la tension de référence du capteur, égale à 1.65 V
+U<sub>ref</sub> : la tension de référence du capteur, égale à 1.65 V
 
 S<sub>N</sub> : la sensibilité nominale du capteur, égale à 50 mV/A 
 
