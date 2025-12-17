@@ -8,6 +8,7 @@
 #include "app.h"
 #include "motor_control/motor.h"
 #include "user_interface/shell.h"
+#include "motor_control/asserv.h"
 static char shell_uart2_received_char;
 
 void init_device(void){
@@ -29,7 +30,7 @@ void init_device(void){
 	motor_init();
 
 	// ASSERV (PID)
-	//	asserv_init();
+	asserv_init();
 	//
 	// Initialisation data acquistion
 	// ANALOG INPUT
@@ -60,7 +61,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
 void loop(){
 	set_speed();
-	HAL_Delay(state.TIME);
+	HAL_Delay(100);
 	capt();
 	//pid();
 }

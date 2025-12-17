@@ -1,0 +1,2 @@
+../Core/Src/motor_control/asserv.c:37:6:asserv_init	4	static
+../Core/Src/motor_control/asserv.c:64:8:get_pid	64	static

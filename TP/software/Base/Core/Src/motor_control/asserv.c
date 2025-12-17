@@ -6,41 +6,88 @@
  */
 
 #include "motor_control/asserv.h"
-/*
-double speed_pid(void){
+
+typedef struct {
+	float PREV_I;
+	float CURRENT_I;
+	float TARGET_I;
+	float MAX_I;
+
+	float PREV_SPEED;
+	float CURRENT_SPEED;
+	float TARGET_SPEED;
+	float MAX_SPEED;
+
+	float integrator;
+	float prevError;
+	float prevMeasurement;
+
+	int T;
+
+	float kp_S;
+	float ki_S;
+	float kd_S;
+	float kp_I;
+	float ki_I;
+	float kd_I;
+
+} Asserv;
+Asserv pid = {0};
+
+void asserv_init(void)
+{
+	pid.PREV_I = 0;
+	pid.CURRENT_I = 0;
+	pid.TARGET_I = 0;
+	pid.MAX_I = 5;
+
+	pid.PREV_SPEED = 0;
+	pid.CURRENT_SPEED = 0;
+	pid.TARGET_SPEED = 0;
+	pid.MAX_SPEED = 2000;
+
+	pid.integrator = 0;
+	pid.prevError = 0;
+	pid.prevMeasurement = 0;
+
+	pid.T = 0;
+
+	pid.kp_S = 0;
+	pid.ki_S = 0;
+	pid.kd_S = 0;
+	pid.kp_I = 0;
+	pid.ki_I = 0;
+	pid.kd_I = 0;
+}
+
+
+double get_pid(float measurement,float state,float goal,float kp,float ki,float kd,float MAX,float MIN,float MAX_INT,float MIN_INT){
 	    float error = state - goal;
 
-	    float proportional = Kp * error;
+	    float proportional = kp * error;
 
-	    state.integrator += 0.5f *Ki * (error + pid->prevError) * pid->T;
+	    pid.integrator += 0.5f *ki * (error + pid.prevError) * pid.T;
 
-	    // Anti-windup (Clamping) : On empêche l'intégrateur de saturer
-	    if (pid->integrator > pid->limMaxInt) {
-	        pid->integrator = pid->limMaxInt;
-	    } else if (pid->integrator < pid->limMinInt) {
-	        pid->integrator = pid->limMinInt;
+	    if (pid.integrator > MAX_INT) {
+	    	pid.integrator = MAX_INT;
+	    } else if (pid.integrator < MIN_INT) {
+	    	pid.integrator = MIN_INT;
 	    }
 
-	    // --- Terme Dérivé (D) ---
-	    // Note : On peut dériver sur l'erreur ou sur la mesure (pour éviter les à-coups sur changement de consigne)
-	    // Ici, implémentation classique sur l'erreur : (error - prevError) / T
-	    float derivative = pid->Kd * (error - pid->prevError) / pid->T;
+	    float derivative = kd * (error - pid.prevError) / pid.T;
 
-	    // --- Calcul de la sortie totale ---
-	    float output = proportional + pid->integrator + derivative;
+	    float output = proportional + pid.integrator + derivative;
 
-	    // Saturation de la sortie (Output Clamping)
-	    if (output > pid->limMax) {
-	        output = pid->limMax;
-	    } else if (output < pid->limMin) {
-	        output = pid->limMin;
+	    if (output > MAX) {
+	        output = MAX;
+	    } else if (output < MIN) {
+	        output = MIN;
 	    }
 
-	    // --- Mise à jour des variables pour le prochain tour ---
-	    pid->prevError = error;
-	    pid->prevMeasurement = measurement;
+	    pid.prevError = error;
+	    pid.prevMeasurement = measurement;
 
 	    return output;
 	}
-}
- */
+
+
