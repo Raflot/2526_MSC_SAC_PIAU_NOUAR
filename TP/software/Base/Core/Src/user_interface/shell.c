@@ -6,6 +6,7 @@
  */
 
 #include "user_interface/shell.h"
+#include "acquisition/input_analog.h"
 
 h_shell_t hshell1;
 
@@ -136,12 +137,11 @@ void sh_stop(h_shell_t* h_shell, int argc, char** argv)
 
 void sh_imes(h_shell_t* h_shell, int argc, char** argv)
 {
-    float current = measure_current_pooling();
+    float current = measure_current();
     int size;
     size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Courant U: %.3f A\r\n", current);
     h_shell->drv.transmit(h_shell->print_buffer, size);
 }
-
 /**
  * @brief Initializes the shell instance.
  *
@@ -158,6 +158,8 @@ void shell_init(h_shell_t* h_shell)
 	size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "\r\n=> Monsieur Shell v0.2.2 without FreeRTOS <=\r\n");
 	h_shell->drv.transmit(h_shell->print_buffer, size);
 	h_shell->drv.transmit(PROMPT, sizeof(PROMPT));
+
+	capt_init();
 
 	shell_add(h_shell, "help", sh_help, "Help");
 	shell_add(h_shell, "test", sh_test_list, "Test list");
