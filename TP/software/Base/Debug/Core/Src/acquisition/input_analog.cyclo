@@ -1,3 +1,2 @@
-../Core/Src/acquisition/input_analog.c:18:6:capt_init	1
-../Core/Src/acquisition/input_analog.c:29:6:HAL_ADC_ConvCpltCallback	2
-../Core/Src/acquisition/input_analog.c:37:7:measure_current	1
+../Core/Src/acquisition/input_analog.c:19:6:capt_init	1
+../Core/Src/acquisition/input_analog.c:28:7:measure_current	1

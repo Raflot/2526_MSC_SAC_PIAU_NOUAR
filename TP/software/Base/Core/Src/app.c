@@ -36,7 +36,7 @@ void init_device(void){
 	// ANALOG INPUT
 	capt_init();
 	// ENCODER INPUT
-	//	input_encoder_init();
+	encoder_init();
 }
 
 uint8_t shell_uart2_transmit(const char *pData, uint16_t size)
