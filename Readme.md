@@ -157,3 +157,17 @@ on obtient apres calibration une mesure plutot fiable : (attendue 1.3v-1.4v a 70
   <img width="600" height="475" alt="image" src="https://github.com/user-attachments/assets/dd5edea7-e94b-4845-ba40-45999547be6c" />
 </p>
 
+On s'intèresse maintenant à la mesure de la vitesse. Pour cela, on doit utiliser l'encodeur en quadrature connecté à la MCC. On cherche alors dans le schéma Kicad sur quels pins est connecté l'encodeur.
+
+<p align="center">
+  <img width="850" height="327" alt="image" src="https://github.com/user-attachments/assets/5907409d-68ff-4a35-8d4e-81b90a6e2c9b" />
+</p>
+
+<p align="center">
+  <img width="482" height="220" alt="image" src="https://github.com/user-attachments/assets/c9580e95-70e2-4716-ab10-f3c7520057c4" />
+</p>
+
+<p align="center">
+  <img width="645" height="125" alt="image" src="https://github.com/user-attachments/assets/302e115b-f896-444c-a1ef-c377fbfc3645" />
+</p>
+
