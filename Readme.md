@@ -171,3 +171,4 @@ On s'intèresse maintenant à la mesure de la vitesse. Pour cela, on doit utilis
   <img width="645" height="125" alt="image" src="https://github.com/user-attachments/assets/302e115b-f896-444c-a1ef-c377fbfc3645" />
 </p>
 
+On peut alors voir que le 
