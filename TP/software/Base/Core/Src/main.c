@@ -27,6 +27,11 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "app.h"
+#include "acquisition/input_analog.h"
+#include "motor_control/asserv.h"
+#include "motor_control/motor.h"
+#include <stdlib.h>
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -166,7 +171,22 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+	if (hadc->Instance == ADC1)
+	{
+		float I_mes = measure_current();
 
+		float cmd_pwm = compute_pid(
+				&asserv_sys.current_loop,
+				I_mes,
+				asserv_sys.target_current,
+				asserv_sys.T_current
+		);
+
+		//motor_set_pwm(cmd_pwm);
+	}
+}
 /* USER CODE END 4 */
 
 /**
@@ -179,18 +199,18 @@ void SystemClock_Config(void)
  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-  if (htim->Instance == TIM6)
-  {
-    HAL_IncTick();
-    static uint8_t speed_loop_counter = 0;
-    speed_loop_counter++;
+	if (htim->Instance == TIM6)
+	{
+		HAL_IncTick();
+		static uint8_t speed_loop_counter = 0;
+		speed_loop_counter++;
 
-    if (speed_loop_counter >= 10)
-    {
-        encoder_compute_speed_100Hz();
-        speed_loop_counter = 0;
-    }
-  }
+		if (speed_loop_counter >= 10)
+		{
+			encoder_compute_speed_100Hz();
+			speed_loop_counter = 0;
+		}
+	}
 }
 
 /**

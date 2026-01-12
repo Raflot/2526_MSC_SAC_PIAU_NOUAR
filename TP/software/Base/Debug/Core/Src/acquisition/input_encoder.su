@@ -1,7 +1,7 @@
 ../Core/Src/acquisition/input_encoder.c:25:6:encoder_init	40	static
 ../Core/Src/acquisition/input_encoder.c:49:6:HAL_GPIO_EXTI_Callback	24	static
-../Core/Src/acquisition/input_encoder.c:89:7:position	4	static
-../Core/Src/acquisition/input_encoder.c:96:5:sens	4	static
-../Core/Src/acquisition/input_encoder.c:101:5:turn	4	static
-../Core/Src/acquisition/input_encoder.c:105:6:encoder_compute_speed_100Hz	16	static
-../Core/Src/acquisition/input_encoder.c:113:7:speed	4	static
+../Core/Src/acquisition/input_encoder.c:83:7:position	4	static
+../Core/Src/acquisition/input_encoder.c:90:5:sens	4	static
+../Core/Src/acquisition/input_encoder.c:95:5:turn	4	static
+../Core/Src/acquisition/input_encoder.c:99:6:encoder_compute_speed_100Hz	16	static
+../Core/Src/acquisition/input_encoder.c:107:7:speed	4	static

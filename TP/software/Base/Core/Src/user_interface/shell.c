@@ -8,6 +8,7 @@
 #include "user_interface/shell.h"
 #include "acquisition/input_analog.h"
 #include "acquisition/input_encoder.h"
+#include "motor_control/asserv.h"
 h_shell_t hshell1;
 
 /**
@@ -26,7 +27,7 @@ h_shell_t hshell1;
  */
 static int is_character_valid(char c)
 {
-	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || (c == ' ') || (c == '=');
+	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || (c == ' ') || (c == '=')|| (c == '.');
 }
 
 static int is_string_valid(char* str)
@@ -160,6 +161,23 @@ void sh_speed(h_shell_t* h_shell, int argc, char** argv)
     size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Vitesse : %.3f r/s\r\n", s);
     h_shell->drv.transmit(h_shell->print_buffer, size);
 }
+
+int sh_set_current(h_shell_t* h_shell, int argc, char** argv)
+{
+    if (argc == 2)
+    {
+        float target = strtof(argv[1], NULL);
+        asserv_sys.target_current = target; // Now works because we included asserv.h
+        int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Target Current set to %.3f A\r\n", target);
+        h_shell->drv.transmit(h_shell->print_buffer, size);
+    }
+    else
+    {
+        int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Error: Syntax is 'iset <amps>'\r\n");
+        h_shell->drv.transmit(h_shell->print_buffer, size);
+    }
+    return 0;
+}
 /**
  * @brief Initializes the shell instance.
  *
@@ -187,6 +205,7 @@ void shell_init(h_shell_t* h_shell)
 	shell_add(h_shell, "mesi", sh_imes, "Mesure courant");
 	shell_add(h_shell, "pos", sh_pos, "Mesure position");
 	shell_add(h_shell, "speed", sh_speed, "Mesure vitesse");
+	shell_add(h_shell, "iset", sh_set_current, "Set Target Current (Amps)");
 }
 
 /**

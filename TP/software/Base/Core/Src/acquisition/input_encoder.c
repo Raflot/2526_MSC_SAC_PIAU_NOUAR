@@ -106,5 +106,5 @@ void encoder_compute_speed_100Hz(void)
 
 float speed(void)
 {
-    return abs(_speed_rad_s);
+    return _speed_rad_s;
 }

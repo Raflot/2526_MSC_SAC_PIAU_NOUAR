@@ -4,90 +4,85 @@
  *  Created on: Nov 11, 2025
  *      Author: nicolas
  */
-
 #include "motor_control/asserv.h"
 
-typedef struct {
-	float PREV_I;
-	float CURRENT_I;
-	float TARGET_I;
-	float MAX_I;
-
-	float PREV_SPEED;
-	float CURRENT_SPEED;
-	float TARGET_SPEED;
-	float MAX_SPEED;
-
-	float integrator;
-	float prevError;
-	float prevMeasurement;
-
-	int T;
-
-	float kp_S;
-	float ki_S;
-	float kd_S;
-	float kp_I;
-	float ki_I;
-	float kd_I;
-
-} Asserv;
-Asserv pid = {0};
+// Global instance
+Asserv asserv_sys = {0};
 
 void asserv_init(void)
 {
-	pid.PREV_I = 0;
-	pid.CURRENT_I = 0;
-	pid.TARGET_I = 0;
-	pid.MAX_I = 5;
+	asserv_sys.T_current = 0.00005f;
+	asserv_sys.target_current = 0.0f;
+	asserv_sys.target_speed = 0.0f;
+	asserv_sys.current_loop.kp = 2000.0f;
 
-	pid.PREV_SPEED = 0;
-	pid.CURRENT_SPEED = 0;
-	pid.TARGET_SPEED = 0;
-	pid.MAX_SPEED = 2000;
+	asserv_sys.current_loop.ki = 10000.0f;
+	//asserv_sys.current_loop.kp = 0.007f;
+	//asserv_sys.current_loop.ki = 12.0f;
+	asserv_sys.current_loop.kd = 0.0f;
 
-	pid.integrator = 0;
-	pid.prevError = 0;
-	pid.prevMeasurement = 0;
+	asserv_sys.current_loop.max_integral = 4250.0f;
+	asserv_sys.current_loop.min_integral = -4250.0f;
+	asserv_sys.current_loop.max_output = 4250.0f;
+	asserv_sys.current_loop.min_output = -4250.0f;
+	asserv_sys.current_loop.integrator = 0.0f;
+	asserv_sys.current_loop.prev_error = 0.0f;
+	asserv_sys.current_loop.prev_measurement = 0.0f;
 
-	pid.T = 0;
+	asserv_sys.speed_loop.kp = 0.015f;
+	asserv_sys.speed_loop.ki = 0.06f;
+	asserv_sys.speed_loop.kd = 0.0f;
 
-	pid.kp_S = 0;
-	pid.ki_S = 0;
-	pid.kd_S = 0;
-	pid.kp_I = 0;
-	pid.ki_I = 0;
-	pid.kd_I = 0;
+	asserv_sys.speed_loop.max_integral = 8499.0f;
+	asserv_sys.speed_loop.min_integral = -8499.0f;
+	asserv_sys.speed_loop.max_output = 8499.0f;
+	asserv_sys.speed_loop.min_output = -8499.0f;
+
+	asserv_sys.speed_loop.integrator = 0.0f;
+	asserv_sys.speed_loop.prev_error = 0.0f;
+	asserv_sys.speed_loop.prev_measurement = 0.0f;
 }
 
+float update_current_loop(float current_measurement)
+{
+	float pwm_adjustment = compute_pid(
+			&asserv_sys.current_loop,
+			current_measurement,
+			asserv_sys.target_current,
+			asserv_sys.T_current
+	);
 
-double get_pid(float measurement,float state,float goal,float kp,float ki,float kd,float MAX,float MIN,float MAX_INT,float MIN_INT){
-	    float error = state - goal;
+	return pwm_adjustment;
+}
 
-	    float proportional = kp * error;
+float compute_pid(PID_Controller *pid, float measurement, float target, float dt)
+{
+	float error = target - measurement;
 
-	    pid.integrator += 0.5f *ki * (error + pid.prevError) * pid.T;
+	float proportional = pid->kp * error;
 
-	    if (pid.integrator > MAX_INT) {
-	    	pid.integrator = MAX_INT;
-	    } else if (pid.integrator < MIN_INT) {
-	    	pid.integrator = MIN_INT;
-	    }
-
-	    float derivative = kd * (error - pid.prevError) / pid.T;
-
-	    float output = proportional + pid.integrator + derivative;
-
-	    if (output > MAX) {
-	        output = MAX;
-	    } else if (output < MIN) {
-	        output = MIN;
-	    }
-
-	    pid.prevError = error;
-	    pid.prevMeasurement = measurement;
-
-	    return output;
+	pid->integrator += 0.5f * pid->ki * (error + pid->prev_error) * dt;
+	if (pid->integrator > pid->max_integral) {
+		pid->integrator = pid->max_integral;
+	} else if (pid->integrator < pid->min_integral) {
+		pid->integrator = pid->min_integral;
 	}
 
+	float derivative = 0.0f;
+	if (dt > 0.0f) {
+		derivative = pid->kd * (error - pid->prev_error) / dt;
+	}
 
+	float output = proportional + pid->integrator + derivative;
+
+	if (output > pid->max_output) {
+		output = pid->max_output;
+	} else if (output < pid->min_output) {
+		output = pid->min_output;
+	}
+
+	pid->prev_error = error;
+	pid->prev_measurement = measurement;
+
+	return output;
+}
