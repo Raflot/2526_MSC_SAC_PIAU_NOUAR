@@ -59,6 +59,24 @@ extern DMA_HandleTypeDef hdma_adc1;
 extern DMA_HandleTypeDef hdma_tim1_ch1;
 extern UART_HandleTypeDef huart2;
 extern TIM_HandleTypeDef htim6;
+void EXTI4_IRQHandler(void)
+{
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
+}
+
+void EXTI9_5_IRQHandler(void)
+{
+
+  if(__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_6) != RESET)
+  {
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6);
+  }
+
+  if(__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_8) != RESET)
+  {
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8);
+  }
+}
 
 /* USER CODE BEGIN EV */
 

@@ -11,7 +11,7 @@
 
 #define ADC_REF_VOLTAGE  3.3f
 #define ADC_RESOLUTION   4095.0f
-#define SENSITIVITY      0.05f
+#define SENSITIVITY      0.08f
 
 volatile uint16_t adc_dma_buffer[1];
 float current_offset = 1.65f;

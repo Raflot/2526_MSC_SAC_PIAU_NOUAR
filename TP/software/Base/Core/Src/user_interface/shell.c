@@ -7,7 +7,7 @@
 
 #include "user_interface/shell.h"
 #include "acquisition/input_analog.h"
-
+#include "acquisition/input_encoder.h"
 h_shell_t hshell1;
 
 /**
@@ -139,7 +139,25 @@ void sh_imes(h_shell_t* h_shell, int argc, char** argv)
 {
     float current = measure_current();
     int size;
-    size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Courant U: %.3f A\r\n", current);
+    size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Courant : %.3f A\r\n", current);
+    h_shell->drv.transmit(h_shell->print_buffer, size);
+}
+
+void sh_pos(h_shell_t* h_shell, int argc, char** argv)
+{
+    float pos = position();
+    int sen = sens();
+    int turned = turn();
+    int size;
+    size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Position : %.3f Rad - Sens : %d - Turns : %d \r\n", pos,sen,turned);
+    h_shell->drv.transmit(h_shell->print_buffer, size);
+}
+
+void sh_speed(h_shell_t* h_shell, int argc, char** argv)
+{
+    float s = speed();
+    int size;
+    size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Vitesse : %.3f r/s\r\n", s);
     h_shell->drv.transmit(h_shell->print_buffer, size);
 }
 /**
@@ -163,10 +181,12 @@ void shell_init(h_shell_t* h_shell)
 
 	shell_add(h_shell, "help", sh_help, "Help");
 	shell_add(h_shell, "test", sh_test_list, "Test list");
-	shell_add(h_shell, "speed", sh_motor, "Set motor pwm ratio (0-100)");
+	shell_add(h_shell, "motor", sh_motor, "Set motor pwm ratio (0-100)");
 	shell_add(h_shell, "start", sh_start, "PWM started");
 	shell_add(h_shell, "stop", sh_stop, "PWM stoped");
-	shell_add(h_shell, "mesi", sh_imes, "Mesure courant (Polling)");
+	shell_add(h_shell, "mesi", sh_imes, "Mesure courant");
+	shell_add(h_shell, "pos", sh_pos, "Mesure position");
+	shell_add(h_shell, "speed", sh_speed, "Mesure vitesse");
 }
 
 /**

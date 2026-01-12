@@ -6,7 +6,9 @@
 ../Core/Src/user_interface/shell.c:104:6:sh_start	32	static
 ../Core/Src/user_interface/shell.c:121:6:sh_stop	32	static
 ../Core/Src/user_interface/shell.c:138:6:sh_imes	48	static
-../Core/Src/user_interface/shell.c:152:6:shell_init	24	static
-../Core/Src/user_interface/shell.c:183:5:shell_add	24	static
-../Core/Src/user_interface/shell.c:208:12:shell_exec	64	static
-../Core/Src/user_interface/shell.c:249:5:shell_run	24	static
+../Core/Src/user_interface/shell.c:146:6:sh_pos	64	static
+../Core/Src/user_interface/shell.c:156:6:sh_speed	48	static
+../Core/Src/user_interface/shell.c:170:6:shell_init	24	static
+../Core/Src/user_interface/shell.c:203:5:shell_add	24	static
+../Core/Src/user_interface/shell.c:228:12:shell_exec	64	static
+../Core/Src/user_interface/shell.c:269:5:shell_run	24	static
