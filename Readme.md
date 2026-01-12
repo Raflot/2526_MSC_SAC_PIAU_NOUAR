@@ -153,5 +153,7 @@ Apres avoir testé la mesure de courant en pooling on configure l'adc, le dma et
 
 on obtient apres calibration une mesure plutot fiable : (attendue 1.3v-1.4v a 70 et 0v a 50) 
 
-<img width="244" height="190" alt="image" src="https://github.com/user-attachments/assets/dd5edea7-e94b-4845-ba40-45999547be6c" />
+<p align="center">
+  <img width="600" height="475" alt="image" src="https://github.com/user-attachments/assets/dd5edea7-e94b-4845-ba40-45999547be6c" />
+</p>
 
