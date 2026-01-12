@@ -171,11 +171,36 @@ On s'intèresse maintenant à la mesure de la vitesse. Pour cela, on doit utilis
   <img width="645" height="125" alt="image" src="https://github.com/user-attachments/assets/302e115b-f896-444c-a1ef-c377fbfc3645" />
 </p>
 
-On peut alors voir que l'encodeur est relié aux pins PA6 pour les fronts A, PA4 pour les fronts B et PC8 pour les fronts Z. Les fronts A et B permettent de connaitre le sens de rotation et Z permet de connaitre la vitesse de 
-rotation du moteur.
+On peut alors voir que l'encodeur est relié aux pins PA6 pour les fronts A, PA4 pour les fronts B et PC8 pour les fronts Z. Les fronts A et B permettent de connaitre le sens de rotation et Z permet de connaitre la vitesse de rotation du moteur.
 
 On observe alors à l'oscilloscope les fronts montants A, B et Z :
 
 <p align="center">
   <img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/659256e3-f85d-413d-8ca0-01f00fbeb22f" />
 </p>
+
+Mainteneant que nous avons la mesure de vitesse et la mesure de courant de la MCC, on peut implémenter le correceteur PID. En l'occurence, le correcteur implémenté est un correcteur PI basé sur les coefficients trouvés en TD machine avec Monsieur Martin en début d'année. Le schéma de contrôle de la MCC est alors comme ci-dessous :
+
+<p align="center">
+  <img width="1000" height="320" alt="image" src="https://github.com/user-attachments/assets/73c5164d-b646-4481-a488-4833b0b38c93" />
+</p>
+
+On implémente deux correcteurs : un correcteur PI pour la boucle de vitesse ainsi qu'un correcteur PI pour la boucle de courant.
+
+Voici les coefficients du correcteur PI pour la boucle de courant :
+
+<p align="center">
+  <img width="434" height="136" alt="image" src="https://github.com/user-attachments/assets/d6291d6a-9731-4335-89ad-bb12451562cf" />
+</p>
+
+Et voici les coefficients du correcteur PI pour la boucle de vitesse : 
+
+<p align="center">
+  <img width="368" height="142" alt="image" src="https://github.com/user-attachments/assets/419dd2fb-aa4c-44ec-ac07-a463aa2fbf75" />
+</p>
+
+Par ailleurs, comme le temps de réponse de la partie mécanique de la MCC est plus long que celui de la partie électrique, on peut se permettre de prendre un temps d'échantillonag plus long pour la boucle de vitesse. On a alors :
+
+T<sub>Ech courant</sub> = 50 us
+
+T<sub>Ech vitesse</sub> = 10 ms
