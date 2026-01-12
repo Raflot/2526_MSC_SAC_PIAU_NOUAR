@@ -171,4 +171,11 @@ On s'intèresse maintenant à la mesure de la vitesse. Pour cela, on doit utilis
   <img width="645" height="125" alt="image" src="https://github.com/user-attachments/assets/302e115b-f896-444c-a1ef-c377fbfc3645" />
 </p>
 
-On peut alors voir que le 
+On peut alors voir que l'encodeur est relié aux pins PA6 pour les fronts A, PA4 pour les fronts B et PC8 pour les fronts Z. Les fronts A et B permettent de connaitre le sens de rotation et Z permet de connaitre la vitesse de 
+rotation du moteur.
+
+On observe alors à l'oscilloscope les fronts montants A, B et Z :
+
+<p align="center">
+  <img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/659256e3-f85d-413d-8ca0-01f00fbeb22f" />
+</p>
